@@ -31,3 +31,38 @@ var port = process.env.PORT || 8080;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
 });
+
+
+// My code
+/*
+	Timestamp Microservice FCC
+*/
+app.get('/timestamp', function(req, res){
+	res.send("Welcome to timestamp");
+});
+
+app.get('/timestamp/:time', function(req, res){
+	var MONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+	var timestr = req.params.time;
+	console.log(timestr);
+	if (isNaN(timestr)){
+		var date = new Date(timestr);
+		var dateString = MONTH[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+		var jdate = {
+			"unix" : date.getTime() / 1000,
+			"natural" : dateString
+		};
+		res.json(jdate);
+	}
+	else {
+		var time = parseInt(timestr);
+		var date = new Date(time * 1000);
+		var dateString = MONTH[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+		var jdate = {
+			"unix" : time,
+			"natural" : dateString
+		};
+		res.json(jdate);
+	}
+});
