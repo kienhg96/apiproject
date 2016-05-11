@@ -37,10 +37,10 @@ app.listen(port,  function () {
 /*
 	Timestamp Microservice FCC
 */
-app.get('/timestamp', function(req, res){
-	res.send("Welcome to timestamp");
-});
 
+app.get('/timestamp', function(req, res){
+	res.sendFile(__dirname + "/public/timestamp.html");
+});
 app.get('/timestamp/:time', function(req, res){
 	var MONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
