@@ -6,5 +6,7 @@ $(document).ready(function(){
     $("#whoami").on('click', function(){
         window.location = window.location.href + "whoami";
     });
-    
+    $("#shorturl").on('click', function(){
+        window.location = window.location.href + "shorturl";
+    });
 });

@@ -25,6 +25,7 @@ app.get('/', function(req, res){
 app.get('/timestamp', function(req, res){
 	res.sendFile(__dirname + "/public/timestamp.html");
 });
+
 app.get('/timestamp/:time', function(req, res){
 	var MONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -54,3 +55,11 @@ app.get('/timestamp/:time', function(req, res){
 // Who am i
 var whoami = require('./app/whoami/whoami.js');
 whoami(app);
+
+// Shorten URL
+
+var shorturl = require('./app/shorturl/shorturl.js');
+app.get('/shorturl', function(req, res){
+	res.sendFile(__dirname + "/public/shorturl.html");
+});
+shorturl(app);
