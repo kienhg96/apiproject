@@ -3,9 +3,7 @@
 var mongo = require('mongodb').MongoClient;
 
 module.exports = function(app) {
-    app.get('/shorturl', function(req, res){
-        res.sendFile('./../../public/shorturl.html');
-    });
+
     
     app.get('/shorturl/new/*', function(req, res){
         var originalurl = req.url.substr(14, req.url.length);
@@ -53,7 +51,6 @@ module.exports = function(app) {
                     }
                     db.close();
                 });
-                
         });
     });
 }
