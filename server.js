@@ -30,7 +30,7 @@ app.get('/timestamp/:time', function(req, res){
 	var MONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 	var timestr = req.params.time;
-	console.log(timestr);
+	//console.log(timestr);
 	if (isNaN(timestr)){
 		var date = new Date(timestr);
 		var dateString = MONTH[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
@@ -63,3 +63,13 @@ app.get('/shorturl', function(req, res){
 	res.sendFile(__dirname + "/public/shorturl.html");
 });
 shorturl(app);
+
+// Image search
+
+
+var imgsearch = require('./app/imagesearch/imagesearch.js');
+
+app.get('/imagesearch', function(req, res){
+   res.sendFile(__dirname + "/public/imagesearch.html");
+});
+imgsearch(app);

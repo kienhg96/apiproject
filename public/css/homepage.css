@@ -1,3 +1,11 @@
 body {
-    background-color: rgb(240,240,240) !important;;
+    background-color: rgb(240,240,240) !important;
+}
+#title {
+    color: blue;
+    text-align: center;
+}
+.btn {
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
 }
