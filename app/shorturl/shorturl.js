@@ -20,14 +20,7 @@ module.exports = function(app) {
                 collection = db.collection('url');
                 //console.log(req.connection.encrypted);
                 var shurl = req.get('host') + "/shorturl/" + code;
-                var shurljson;
-                console.log( "**** " + req.headers['x-forwarded-proto']);
-                if (req.connection.encrypted === undefined){
-                    shurljson = "http://" + req.get('host') + "/shorturl/" + code;
-                }
-                else {
-                    shurljson = "https://" + req.get('host') + "/shorturl/" + code;
-                }
+                var shurljson = req.headers['x-forwarded-proto'] + "://" + shurl;
                 var obj = {"original_url" : originalurl, "short_url": shurl};
                 
                 res.json({"original_url" : originalurl, "short_url": shurljson});
