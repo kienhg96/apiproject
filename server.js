@@ -70,3 +70,6 @@ app.get('/imagesearch', function(req, res){
    res.sendFile(__dirname + "/public/imagesearch.html");
 });
 imgsearch(app);
+
+var filemeta = require('./app/filemeta/filemeta.js');
+filemeta(app);

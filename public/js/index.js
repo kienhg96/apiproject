@@ -12,4 +12,7 @@ $(document).ready(function(){
     $("#imagesearch").on('click', function(){
         window.location = window.location.href + "imagesearch";
     });
+    $("#filemeta").on('click', function(){
+        window.location = window.location.href + "filemeta";
+    });
 });

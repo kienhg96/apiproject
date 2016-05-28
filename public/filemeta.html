@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	</head>
+	<body>
+		<form id="form" enctype="multipart/form-data" method="post" action="/post">
+			<input id='file' type="file" name="file"/>
+		</form>
+		<button id="submit">Submit</button>
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var file;
+			$('#file').on('change', function(event){
+				file = event.target.files[0];
+			});
+			$('#submit').on('click', function(){
+				var fd = new FormData();
+				fd.append('file', file);
+				$.ajax({
+					url: '/filemeta',
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					data: fd,
+					success: function(data){
+						alert("File size: " + data.size);
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+				//console.log(file);
+			});
+		});
+	</script>
+</html>
+

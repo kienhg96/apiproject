@@ -3,7 +3,6 @@
 var mongo = require('mongodb').MongoClient;
 module.exports = function(app) {
 
-    
     app.get('/shorturl/new/*', function(req, res){
         var originalurl = req.url.split('/shorturl/new/')[1];
         mongo.connect(process.env.MONGO_URI, function(err, db){
