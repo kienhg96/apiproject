@@ -21,7 +21,7 @@ module.exports = function(app) {
                 //console.log(req.connection.encrypted);
                 var shurl = req.get('host') + "/shorturl/" + code;
                 var shurljson;
-                console.log( "****" + req.protocol)
+                console.log( "**** " + req.headers['x-forwarded-proto']);
                 if (req.connection.encrypted === undefined){
                     shurljson = "http://" + req.get('host') + "/shorturl/" + code;
                 }
