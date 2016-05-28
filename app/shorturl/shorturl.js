@@ -5,7 +5,10 @@ module.exports = function(app) {
 
     
     app.get('/shorturl/new/*', function(req, res){
-        var originalurl = req.url.substr(14, req.url.length);
+        console.log(req.url);
+
+        var originalurl = req.url.split('/shorturl/new/')[1];
+        //console.log(originalurl);
         mongo.connect(process.env.MONGO_URI, function(err, db){
             if (err) throw err;
             var collection = db.collection('urlcode');
