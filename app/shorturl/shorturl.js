@@ -1,13 +1,12 @@
 'use strict';
 
 var mongo = require('mongodb').MongoClient;
-
 module.exports = function(app) {
 
     
     app.get('/shorturl/new/*', function(req, res){
         var originalurl = req.url.substr(14, req.url.length);
-        mongo.connect('mongodb://localhost:27017/shorturl', function(err, db){
+        mongo.connect(process.env.MONGO_URI, function(err, db){
             if (err) throw err;
             var collection = db.collection('urlcode');
             
@@ -19,11 +18,18 @@ module.exports = function(app) {
                 collection.update({}, {$set :{ 'code': code + 1 }});
                 
                 collection = db.collection('url');
+                //console.log(req.connection.encrypted);
+                var shurl = req.get('host') + "/shorturl/" + code;
+                var shurljson;
+                if (req.connection.encrypted){
+                    shurljson = "https://" + req.get('host') + "/shorturl/" + code;
+                }
+                else {
+                    shurljson = "http://" + req.get('host') + "/shorturl/" + code;
+                }
+                var obj = {"original_url" : originalurl, "short_url": shurl};
                 
-                var obj = {"original_url" : originalurl, "short_url": "https://" + 
-                req.get('host') + "/shorturl/" + code};
-                
-                res.json(obj);
+                res.json({"original_url" : originalurl, "short_url": shurljson});
                 
                 collection.insert(obj, function(err){
                     if (err) throw err;
@@ -35,10 +41,10 @@ module.exports = function(app) {
     
     app.get('/shorturl/:code', function(req, res){
         var code = req.params.code;
-        mongo.connect('mongodb://localhost:27017/shorturl', function(err, db){
+        mongo.connect(process.env.MONGO_URI, function(err, db){
             if (err) throw err;
             var collection = db.collection('url');
-            var short = "https://" + req.get('host') + "/shorturl/" + code;
+            var short = req.get('host') + "/shorturl/" + code;
             collection.find({'short_url' : short}).toArray(function(err, arr){
                     if (err) throw err;
                     if (arr.length !== 0){
