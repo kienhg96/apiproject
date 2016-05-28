@@ -21,11 +21,11 @@ module.exports = function(app) {
                 //console.log(req.connection.encrypted);
                 var shurl = req.get('host') + "/shorturl/" + code;
                 var shurljson;
-                if (req.connection.encrypted){
-                    shurljson = "https://" + req.get('host') + "/shorturl/" + code;
+                if (req.connection.encrypted === undefined){
+                    shurljson = "http://" + req.get('host') + "/shorturl/" + code;
                 }
                 else {
-                    shurljson = "http://" + req.get('host') + "/shorturl/" + code;
+                    shurljson = "https://" + req.get('host') + "/shorturl/" + code;
                 }
                 var obj = {"original_url" : originalurl, "short_url": shurl};
                 
